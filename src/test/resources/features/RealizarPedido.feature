@@ -1,14 +1,14 @@
-Feature: Realizar el inicio de sesion en la app
+Feature: Realizar un pedido en la app
   Como usuario de la app quiero realizar
-  una autenticacion con mis credenciales
+  un pedido
 
-  @InicioDeSesion
-  Scenario Outline: Intento de autenticacion, caso exitoso
+  @RealizarPedido
+  Scenario Outline: Intento de pedido, caso exitoso
     Given Juan abre la app de SurtiMax
     And Iniciar sesion con sus datos
       | usuario   | clave   |
       | <usuario> | <clave> |
-    Then Verifica el mensaje en el menu principal: Fuerza de Venta
+    When realiza un pedido en la app
     Examples:
       | usuario    | clave       |
       | 0969947002 | 0969947002  |
