@@ -14,10 +14,9 @@ import java.util.logging.Logger;
 
 import static com.surtimax.certificacion.ui.UIInicioDeSesion.*;
 
-
 public class IngresarCredenciales implements Interaction {
 
-    private InicioSesionModel inicioSesionModelData;
+    private final InicioSesionModel inicioSesionModelData;
 
     public IngresarCredenciales(InicioSesionModel inicioSesionModelData){
         this.inicioSesionModelData = inicioSesionModelData;

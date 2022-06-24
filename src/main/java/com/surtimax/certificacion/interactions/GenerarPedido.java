@@ -9,6 +9,7 @@ import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import static com.surtimax.certificacion.ui.UiCliente.BTN_ACEPTAR_PROBLEMA;
 import static com.surtimax.certificacion.ui.UiCliente.BTN_PEDIDO;
+import static com.surtimax.certificacion.ui.UiPedido.*;
 
 public class GenerarPedido implements Interaction {
 
@@ -25,7 +26,12 @@ public class GenerarPedido implements Interaction {
         actor.attemptsTo(
                 WaitUntil.the(BTN_PEDIDO, WebElementStateMatchers.isEnabled()).forNoMoreThan(7).seconds(),
                 Tap.on(BTN_PEDIDO),
-                ValidarDialogo.presentadoEnPantalla(BTN_ACEPTAR_PROBLEMA)
+                ValidarDialogo.presentadoEnPantalla(BTN_ACEPTAR_PROBLEMA),
+                WaitUntil.the(BTN_FINALIZAR, WebElementStateMatchers.isEnabled()).forNoMoreThan(7).seconds(),
+                Tap.on(356,385),
+                Tap.on(BTN_MAS),
+                Tap.on(BTN_ACEPTAR_PEDIDO),
+                Tap.on(BTN_FINALIZAR)
         );
     }
 }

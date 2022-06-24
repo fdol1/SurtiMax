@@ -12,7 +12,6 @@ import static com.surtimax.certificacion.ui.UIMenuPrincipal.LBL_MENSAJE;
 
 public class BuscarCliente implements Interaction {
 
-
     public BuscarCliente(){}
 
     public static BuscarCliente paraRealizarPedido(){
@@ -26,7 +25,7 @@ public class BuscarCliente implements Interaction {
                 WaitUntil.the(LBL_MENSAJE, WebElementStateMatchers.isEnabled()).forNoMoreThan(7).seconds(),
                 Tap.on(356,1356),
                 Tap.on(IMG_BUSCAR_CLIENTE),
-                Tap.on(65,894)
+                Tap.on(60,347)
         );
     }
 }

@@ -8,7 +8,12 @@ Feature: Realizar un pedido en la app
     And Iniciar sesion con sus datos
       | usuario   | clave   |
       | <usuario> | <clave> |
-    When realiza un pedido en la app
+    When realiza un pedido en la app con la info del pedido
+      | observacion   | fecha   |
+      | <observacion> | <fecha> |
+    Then al finalizar el pedido, ve su nombre en la pantalla de cliente
+      | nombreCliente   |
+      | <nombreCliente> |
     Examples:
-      | usuario    | clave       |
-      | 0969947002 | 0969947002  |
+      | usuario    | clave       | observacion        | fecha         | nombreCliente             |
+      | 0969947002 | 0969947002  | esto es una prueba | 24 junio 2022 | HERRERA HINCAPIE MAURICIO |
