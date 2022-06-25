@@ -9,7 +9,7 @@ import net.serenitybdd.screenplay.Tasks;
 
 public class IniciarSesion implements Task {
 
-    private InicioSesionModel inicioSesionModelData;
+    private final InicioSesionModel inicioSesionModelData;
 
     public IniciarSesion(InicioSesionModel inicioSesionModelData){
         this.inicioSesionModelData = inicioSesionModelData;
@@ -20,7 +20,6 @@ public class IniciarSesion implements Task {
     }
     @Override
     public <T extends Actor> void performAs(T actor) {
-
         actor.attemptsTo(
                 AceptarPermisos.enLaApp(),
                 IngresarCredenciales.enLaAppSurtiMax(inicioSesionModelData)

@@ -10,5 +10,5 @@ Feature: Realizar el inicio de sesion en la app
       | <usuario> | <clave> |
     Then Verifica el mensaje en el menu principal: Fuerza de Venta
     Examples:
-      | usuario | clave |
-      | 0969947002    | 0969947002  |
+      | usuario    | clave       |
+      | 0969947002 | 0969947002  |

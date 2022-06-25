@@ -20,7 +20,6 @@ public class IniciarSesionStepDefinition {
         theActorCalled(usuario).wasAbleTo(AbreLaApp.deSurtiMax());
     }
 
-
     @Given("^Iniciar sesion con sus datos$")
     public void iniciarSesionConSusDatos(List<InicioSesionModel> inicioSesionModelList) {
         theActorInTheSpotlight().attemptsTo(IniciarSesion.conLasCredencialesDeUsuario(inicioSesionModelList.get(0)));
@@ -28,6 +27,6 @@ public class IniciarSesionStepDefinition {
 
     @Then("^Verifica el mensaje en el menu principal: (.*)$")
     public void verificaElMensajeEnElMenuPrincipalMensaje(String mensaje) {
-        theActorInTheSpotlight().should(seeThat(VerificarMensaje.deCompraExitosa(mensaje)));
+        theActorInTheSpotlight().should(seeThat(VerificarMensaje.enPantalla(mensaje)));
     }
 }

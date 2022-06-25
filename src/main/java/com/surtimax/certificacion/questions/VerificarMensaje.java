@@ -8,7 +8,6 @@ import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import static com.surtimax.certificacion.ui.UIMenuPrincipal.LBL_MENSAJE;
 
-
 public class VerificarMensaje implements Question<Boolean> {
 
     private final String mensaje;
@@ -17,7 +16,7 @@ public class VerificarMensaje implements Question<Boolean> {
         this.mensaje = mensaje;
     }
 
-    public  static  VerificarMensaje deCompraExitosa(String mensaje){
+    public  static  VerificarMensaje enPantalla(String mensaje){
         return new VerificarMensaje(mensaje);
     }
 
