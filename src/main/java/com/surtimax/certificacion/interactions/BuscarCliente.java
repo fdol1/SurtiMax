@@ -1,5 +1,8 @@
 package com.surtimax.certificacion.interactions;
 
+import com.surtimax.certificacion.exceptions.AceptarPermisosException;
+import com.surtimax.certificacion.exceptions.BuscarClienteException;
+import com.surtimax.certificacion.interactions.choucair.TakeScreenshot;
 import com.surtimax.certificacion.interactions.choucair.Tap;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
@@ -21,11 +24,16 @@ public class BuscarCliente implements Interaction {
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        actor.attemptsTo(
-                WaitUntil.the(LBL_MENSAJE, WebElementStateMatchers.isEnabled()).forNoMoreThan(7).seconds(),
-                Tap.on(356,1356),
-                Tap.on(IMG_BUSCAR_CLIENTE),
-                Tap.on(60,347)
-        );
+        try {
+            actor.attemptsTo(
+                    WaitUntil.the(LBL_MENSAJE, WebElementStateMatchers.isEnabled()).forNoMoreThan(7).seconds(),
+                    Tap.on(356,1356),
+                    Tap.on(IMG_BUSCAR_CLIENTE),
+                    Tap.on(60,347)
+            );
+            actor.attemptsTo(TakeScreenshot.asEvidence());
+        }catch (RuntimeException eX){
+            throw new BuscarClienteException(BuscarClienteException.Error(),eX);
+        }
     }
 }

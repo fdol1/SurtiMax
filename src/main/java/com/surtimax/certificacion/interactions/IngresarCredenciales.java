@@ -1,6 +1,8 @@
 package com.surtimax.certificacion.interactions;
 
+import com.surtimax.certificacion.exceptions.IngresarCredencialesException;
 import com.surtimax.certificacion.exceptions.IniciarSesionException;
+import com.surtimax.certificacion.interactions.choucair.TakeScreenshot;
 import com.surtimax.certificacion.interactions.choucair.Tap;
 import com.surtimax.certificacion.models.InicioSesionModel;
 import net.serenitybdd.screenplay.Actor;
@@ -36,9 +38,9 @@ public class IngresarCredenciales implements Interaction {
                     Enter.theValue(inicioSesionModelData.getClave()).into(TXT_CLAVE),
                     Tap.on(BTN_INICIAR_SESION)
             );
-            Logger.getAnonymousLogger().info("Inicio de sesion realizado");
+            actor.attemptsTo(TakeScreenshot.asEvidence());
         }catch (RuntimeException eX){
-            throw new IniciarSesionException(IniciarSesionException.Error(),eX);
+            throw new IngresarCredencialesException(IngresarCredencialesException.Error(),eX);
         }
     }
 }

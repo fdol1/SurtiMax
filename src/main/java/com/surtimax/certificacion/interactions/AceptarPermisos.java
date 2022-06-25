@@ -1,5 +1,8 @@
 package com.surtimax.certificacion.interactions;
 
+import com.surtimax.certificacion.exceptions.AceptarPermisosException;
+import com.surtimax.certificacion.exceptions.RealizarPedidoException;
+import com.surtimax.certificacion.interactions.choucair.TakeScreenshot;
 import com.surtimax.certificacion.interactions.choucair.Tap;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
@@ -20,12 +23,18 @@ public class AceptarPermisos implements Interaction {
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        actor.attemptsTo(
-                WaitUntil.the(BTN_PERMITIR_GALERIA, WebElementStateMatchers.isEnabled()).forNoMoreThan(7).seconds(),
-                Tap.on(BTN_PERMITIR_GALERIA),
-                Tap.on(BTN_PERMITIR_LLAMADAS),
-                Tap.on(BTN_UBICACION_SIEMPRE),
-                Tap.on(BTN_PERMITIR_FOTOS_VIDEOS)
-        );
+
+        try {
+            actor.attemptsTo(
+                    WaitUntil.the(BTN_PERMITIR_GALERIA, WebElementStateMatchers.isEnabled()).forNoMoreThan(7).seconds(),
+                    Tap.on(BTN_PERMITIR_GALERIA),
+                    Tap.on(BTN_PERMITIR_LLAMADAS),
+                    Tap.on(BTN_UBICACION_SIEMPRE),
+                    Tap.on(BTN_PERMITIR_FOTOS_VIDEOS)
+            );
+            actor.attemptsTo(TakeScreenshot.asEvidence());
+        }catch (RuntimeException eX){
+            throw new AceptarPermisosException(AceptarPermisosException.Error(),eX);
+        }
     }
 }

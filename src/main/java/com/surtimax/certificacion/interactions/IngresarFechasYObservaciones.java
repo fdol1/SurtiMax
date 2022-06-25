@@ -1,5 +1,7 @@
 package com.surtimax.certificacion.interactions;
 
+import com.surtimax.certificacion.exceptions.IngresarFechasYObservacionesException;
+import com.surtimax.certificacion.interactions.choucair.TakeScreenshot;
 import com.surtimax.certificacion.interactions.choucair.Tap;
 import com.surtimax.certificacion.models.InfoPedidoModel;
 import net.serenitybdd.screenplay.Actor;
@@ -28,16 +30,21 @@ public class IngresarFechasYObservaciones implements Interaction {
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        actor.attemptsTo(
-                WaitUntil.the(BTN_SELECCIONAR_FECHA, WebElementStateMatchers.isEnabled()).forNoMoreThan(7).seconds(),
-                Tap.on(BTN_SELECCIONAR_FECHA),
-                Click.on(String.format(LBL_ITEM_CALENDARIO,infoPedidoModel.getFecha())),
-                Tap.on(BTN_ACEPTAR_FECHA),
-                Enter.theValue(infoPedidoModel.getObservacion()).into(TXT_OBSERVACION),
-                Tap.on(357,1070),
-                Tap.on(105,1162),
-                Tap.on(BTN_ACEPTAR_FIRMA),
-                Tap.on(BTN_FINALIZAR)
-        );
+        try {
+            actor.attemptsTo(
+                    WaitUntil.the(BTN_SELECCIONAR_FECHA, WebElementStateMatchers.isEnabled()).forNoMoreThan(7).seconds(),
+                    Tap.on(BTN_SELECCIONAR_FECHA),
+                    Click.on(String.format(LBL_ITEM_CALENDARIO,infoPedidoModel.getFecha())),
+                    Tap.on(BTN_ACEPTAR_FECHA),
+                    Enter.theValue(infoPedidoModel.getObservacion()).into(TXT_OBSERVACION),
+                    Tap.on(357,1070),
+                    Tap.on(105,1162),
+                    Tap.on(BTN_ACEPTAR_FIRMA),
+                    Tap.on(BTN_FINALIZAR)
+            );
+            actor.attemptsTo(TakeScreenshot.asEvidence());
+        }catch (RuntimeException eX){
+            throw new IngresarFechasYObservacionesException(IngresarFechasYObservacionesException.Error(),eX);
+        }
     }
 }

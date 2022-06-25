@@ -1,5 +1,8 @@
 package com.surtimax.certificacion.interactions;
 
+import com.surtimax.certificacion.exceptions.IngresarFechasYObservacionesException;
+import com.surtimax.certificacion.exceptions.ValidarDialogoException;
+import com.surtimax.certificacion.interactions.choucair.TakeScreenshot;
 import com.surtimax.certificacion.interactions.choucair.Tap;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
@@ -21,10 +24,15 @@ public class ValidarDialogo implements Interaction {
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        if(elementoAValidar.resolveFor(actor).isVisible()){
-            actor.attemptsTo(
-                    Tap.on(elementoAValidar)
-            );
+        try {
+            if(elementoAValidar.resolveFor(actor).isVisible()){
+                actor.attemptsTo(
+                        Tap.on(elementoAValidar)
+                );
+            }
+            actor.attemptsTo(TakeScreenshot.asEvidence());
+        }catch (RuntimeException eX){
+            throw new ValidarDialogoException(ValidarDialogoException.Error(),eX);
         }
     }
 }
